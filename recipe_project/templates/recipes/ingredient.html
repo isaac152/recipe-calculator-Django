@@ -7,6 +7,12 @@
     <title>Recipe</title>
   </head>
   <body>
-    <h1>Recipe</h1>
+    <h1>CREATE INGREDIENT</h1>
+    <form method="POST">
+      {% csrf_token %}
+      <div style="border: solid">{{form.as_p}}</div>
+      <input type="submit" />
+    </form>
+    <a href="{%url 'recipes:create' %}">BACK</a>
   </body>
 </html>

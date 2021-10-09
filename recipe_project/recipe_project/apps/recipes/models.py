@@ -7,6 +7,9 @@ class Category(models.Model):
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
         ordering = ['id']
+    def __str__(self) -> str:
+        return f" {self.name}"
+
 
 class Recipe(models.Model):
     name= models.TextField(verbose_name="Name",null=False)
@@ -28,6 +31,8 @@ class Ingredient(models.Model):
         verbose_name = 'Ingredient'
         verbose_name_plural = 'Ingredients'
         ordering = ['id']
+    def __str__(self) -> str:
+        return f" {self.name}"
 
 class Measure(models.Model):
     name= models.TextField(verbose_name="Name",null=False,unique=True)
@@ -37,21 +42,30 @@ class Measure(models.Model):
         verbose_name_plural = 'Measures'
         ordering = ['id']
 
+    def __str__(self) -> str:
+        return f" {self.name}"
+
 class Quantity(models.Model):
-    name= models.TextField(verbose_name="Name",null=False,unique=True)
+    amount= models.PositiveIntegerField(verbose_name="amount",null=False,unique=True)
 
     class Meta:
         verbose_name = 'Quantity'
         verbose_name_plural = 'Quantities'
         ordering = ['id']
+    
+    def __str__(self) -> str:
+        return f" {self.amount}"
 
 class IngPrice(models.Model):
     recipes = models.ManyToManyField(Recipe)
     price= models.DecimalField(default=0.00,max_digits=9,decimal_places=2,verbose_name="Price",null=False)
-    ingredient=models.ForeignKey(Ingredient,on_delete=models.CASCADE,null=False)
-    measure=models.ForeignKey(Measure,on_delete=models.CASCADE,null=False)
-    quantity=models.ForeignKey(Quantity,on_delete=models.CASCADE,null=False)
+    ingredient=models.OneToOneField(Ingredient,on_delete=models.CASCADE,null=False)
+    measure=models.OneToOneField(Measure,on_delete=models.CASCADE,null=False)
+    quantity=models.OneToOneField(Quantity,on_delete=models.CASCADE,null=False)
     class Meta:
         verbose_name = 'Ingredient price'
         verbose_name_plural = 'Ingredient prices'
         ordering = ['id']
+
+    def __str__(self):
+        return f"{self.ingredient} {self.quantity} {self.measure} Price: {self.price}"
