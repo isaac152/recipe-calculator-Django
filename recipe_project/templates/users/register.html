@@ -1,0 +1,17 @@
+{% extends 'general_components/base.html' %}
+
+{% block header_content%}
+  <h2>REGISTER</h2>
+{% endblock%}
+
+{% block main_content %}
+  <form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Submit"/>
+  </form>
+{% endblock %}
+
+{% block footer_content%}
+  <a href="{% url 'users:index' %}">BACK</a>
+{% endblock%}

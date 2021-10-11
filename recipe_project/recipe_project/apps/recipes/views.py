@@ -10,7 +10,7 @@ from . models import IngPrice,Ingredient,Quantity
 
 
 class Home(LoginRequiredMixin,TemplateView):
-    template_name='home.html'
+    template_name='users/home.html'
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return redirect('users:index')
@@ -45,8 +45,11 @@ class CreateIngredient(LoginRequiredMixin,FormView):
             return self.form_invalid(form)
 
     def check_if_exist_object(self,model,filter):
-        if(not model.objects.get(**filter)):
-            check_model=model.objects.create(**filter).save()
-        else:
+        try:
             check_model=model.objects.get(**filter)
-        return check_model
+        except:
+            check_model=model.objects.create(**filter).save()
+        finally:
+            return check_model
+            
+        

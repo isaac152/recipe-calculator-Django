@@ -1,0 +1,9 @@
+<nav>
+    {% if request.user.is_authenticated %}
+        <label>You're logged as @{{user.username}}.</label>
+        <a href="{% url 'users:logout' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'users:login' %}">Login</a>
+        <a href="{% url 'users:signup' %}">Register</a>
+    {% endif %}
+</nav>
