@@ -1,18 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Recipe</title>
-  </head>
-  <body>
-    <h1>CREATE INGREDIENT</h1>
+{% extends 'general_components/base.html' %}
+{% block head_content%}
+  <title>Creating ingredient</title>
+{%endblock%}
+
+{% block header_content %}
+<h1>CREATE INGREDIENT</h1>
+{% endblock %}
+
+{% block main_content %}
     <form method="POST">
       {% csrf_token %}
-      <div style="border: solid">{{form.as_p}}</div>
-      <input type="submit" />
+      <div style="border: solid">{{form.as_p}}
+        <input type="submit" value="submit"/>
+      </div>
     </form>
-    <a href="{%url 'recipes:create' %}">BACK</a>
-  </body>
-</html>
+{% endblock %}
+
+{% block footer_content %}
+<a href="{%url 'recipes:create' %}">Back to the recipe</a>
+{%  endblock %}
+
+
+

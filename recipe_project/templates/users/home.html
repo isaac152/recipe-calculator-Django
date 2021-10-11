@@ -1,0 +1,10 @@
+{% extends 'general_components/base.html' %}
+
+{% block head_content %}
+<title>Home</title>
+{% endblock %}
+
+{% block main_content%}
+    <h1>HOME</h1>
+    <a href="{% url 'recipes:create' %}">Create recipe</a>
+{% endblock%}
