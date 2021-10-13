@@ -1,24 +1,22 @@
-{% extends 'general_components/base.html' %}
-{% block head_content%}
-  <title>Creating ingredient</title>
-{%endblock%}
-
-{% block header_content %}
+{% extends 'general_components/base.html' %}+ {% block head_content%}
+{% load static %}
+<title>Creating ingredient</title>
+{%endblock%} {% block header_content %}
 <h1>CREATE INGREDIENT</h1>
-{% endblock %}
-
-{% block main_content %}
-    <form method="POST">
-      {% csrf_token %}
-      <div style="border: solid">{{form.as_p}}
-        <input type="submit" value="submit"/>
-      </div>
-    </form>
-{% endblock %}
-
-{% block footer_content %}
+{% endblock %} {% block main_content %}
+<form id="form-container" method="POST">
+  {% csrf_token %} 
+  {{ingredient_formset.management_form}} 
+  {% for form in ingredient_formset %}
+    <div style="border: solid" class="ingredient_form">
+      {{form.as_p}}
+    </div>
+  {% endfor %}
+  <button id="add-form" type="button">Add another ingredient</button>
+  <button id="remove-form" type="button">Remove an ingredient</button>
+  <input type="submit" value="submit" />
+</form>
+<script src="{% static 'js/ingredient.js' %}"></script>
+{% endblock %} {% block footer_content %}
 <a href="{%url 'recipes:create' %}">Back to the recipe</a>
-{%  endblock %}
-
-
-
+{% endblock %}
