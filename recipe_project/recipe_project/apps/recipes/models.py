@@ -1,7 +1,6 @@
 #models import
 from django.db import models
-from django.contrib.auth.models import User
-
+from ..users.models import Profile
 
 class Category(models.Model):
     name= models.TextField(verbose_name="Name",null=False,unique=True)
@@ -17,7 +16,7 @@ class Category(models.Model):
 class Recipe(models.Model):
     name= models.TextField(verbose_name="Name",null=False)
     description= models.TextField(verbose_name="Description")
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, null = False, default = 0)
+    user=models.ForeignKey(Profile,on_delete=models.CASCADE,null=False)
     category=models.ForeignKey(Category,on_delete=models.CASCADE,null=False)
     image = models.ImageField(upload_to='recipe/', blank=True, null=True)
     price= models.DecimalField(default=0.00,max_digits=9,decimal_places=2,verbose_name="Price",null=False)
@@ -62,9 +61,9 @@ class Quantity(models.Model):
 class IngPrice(models.Model):
     recipes = models.ManyToManyField(Recipe)
     price= models.DecimalField(default=0.00,max_digits=9,decimal_places=2,verbose_name="Price",null=False)
-    ingredient=models.OneToOneField(Ingredient,on_delete=models.CASCADE,null=False)
-    measure=models.OneToOneField(Measure,on_delete=models.CASCADE,null=False)
-    quantity=models.OneToOneField(Quantity,on_delete=models.CASCADE,null=False)
+    ingredient=models.ForeignKey(Ingredient,on_delete=models.CASCADE,null=False)
+    measure=models.ForeignKey(Measure,on_delete=models.CASCADE,null=False)
+    quantity=models.ForeignKey(Quantity,on_delete=models.CASCADE,null=False)
     class Meta:
         verbose_name = 'Ingredient price'
         verbose_name_plural = 'Ingredient prices'
