@@ -1,9 +1,12 @@
 #General import
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
-#View import 
 
-from django.views.generic import CreateView
+#model import
+from ..recipes.models import Recipe
+
+#View import 
+from django.views.generic import CreateView, ListView
 from django.contrib.auth.views import LoginView
 from django.views.generic.base import TemplateView
 
@@ -27,3 +30,13 @@ class Index(TemplateView):
         if request.user.is_authenticated:
             return redirect('home')
         return super().dispatch(request, *args, **kwargs)
+
+
+class Profile_ListView(ListView):
+    model = Recipe
+    paginate_by = 2
+    template_name = "users/home.html"
+
+    def get_queryset(self):
+        return Recipe.objects.filter(owner_id= self.request.user.id)
+

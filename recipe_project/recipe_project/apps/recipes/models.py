@@ -1,4 +1,7 @@
+#models import
 from django.db import models
+from django.contrib.auth.models import User
+
 
 class Category(models.Model):
     name= models.TextField(verbose_name="Name",null=False,unique=True)
@@ -14,14 +17,14 @@ class Category(models.Model):
 class Recipe(models.Model):
     name= models.TextField(verbose_name="Name",null=False)
     description= models.TextField(verbose_name="Description")
-    #user_id
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null = False, default = 0)
     category=models.ForeignKey(Category,on_delete=models.CASCADE,null=False)
     image = models.ImageField(upload_to='recipe/', blank=True, null=True)
     price= models.DecimalField(default=0.00,max_digits=9,decimal_places=2,verbose_name="Price",null=False)
     class Meta:
         verbose_name = 'Recipe'
         verbose_name_plural = 'Recipes'
-        ordering = ['id']    
+        ordering = ['id']
 
 
 class Ingredient(models.Model):
