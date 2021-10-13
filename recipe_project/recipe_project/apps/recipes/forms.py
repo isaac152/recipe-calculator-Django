@@ -14,7 +14,7 @@ class RecipeForm(forms.Form):
             }
         )
     )
-    descriptio = forms.CharField(
+    description = forms.CharField(
         label="Recipe description",
         required=True,
         widget=forms.TextInput(
@@ -24,11 +24,19 @@ class RecipeForm(forms.Form):
         )
     )
     category = forms.ModelChoiceField(queryset=Category.objects.all(),required=True,to_field_name='name')
-
-    ingredientes = forms.ModelChoiceField(queryset=IngPrice.objects.all(),required=True)
+    extra_category_count = forms.CharField(widget=forms.HiddenInput())
+    ingredients = forms.ModelChoiceField(queryset=IngPrice.objects.all(),required=True)
 
     def __init__(self,*args, **kwargs):
+        extra_category = kwargs.pop('extra',0)
+        ing = forms.ModelChoiceField(queryset=IngPrice.objects.all(),required=True)
+        if not extra_category:
+            extra_category=0
         super(RecipeForm,self).__init__(*args, **kwargs)
+        self.fields['extra_category_count'].initial = extra_category
+
+        for i in range(int(extra_category)):
+            self.fields[f'extra_category_{i}']=ing
 
 
 

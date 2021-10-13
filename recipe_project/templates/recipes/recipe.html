@@ -2,16 +2,22 @@
 {% block head_content %}
   <title>Creating recipe</title>
 {% endblock %}
+{% load static %}
 
 {% block header_content%}
   <h1>CREATE RECIPE</h1>
 {% endblock %}
 
 {% block main_content %}
-<form method="POST">
+<form method="POST" id="form">
   {% csrf_token %} {{form.as_p}}
+  <button id="add-form" type="button">Add another ingredient</button>
+  <button id="remove-form" type="button">Remove an ingredient</button>
+  <p>
   <input type="submit" />
+  </p>
 </form>
+<script src="{% static 'js/recipe.js' %}"></script>
 <a href="{% url 'recipes:ingredients' %}">Create a new ingredient</a>
 {% endblock %}
 
