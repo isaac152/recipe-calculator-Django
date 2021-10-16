@@ -36,7 +36,7 @@ class CreateRecipe(LoginRequiredMixin,TemplateView):
             recipe=Recipe.objects.create(
                 name=form_cleaned['name'],
                 description = form_cleaned['description'],
-                user = self.request.user.profile,
+                profile = self.request.user.profile,
                 category = form_cleaned['category'],
                 price= price
             )

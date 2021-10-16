@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 
 #model import
 from ..recipes.models import Recipe
+from ..users.models import Profile
 
 #View import 
 from django.views.generic import CreateView, ListView
@@ -35,8 +36,12 @@ class Index(TemplateView):
 class Profile_ListView(ListView):
     model = Recipe
     paginate_by = 2
-    template_name = "users/home.html"
+    template_name = "users/profile.html"
+    context_object_name = "recipes"
 
     def get_queryset(self):
-        return Recipe.objects.filter(owner_id= self.request.user.id)
+        profile = Profile.objects.get(user=self.request.user)
+        queryset = Recipe.objects.filter(profile_id = profile.id)
+        return queryset
+    
 

@@ -1,9 +1,31 @@
-<nav>
-    {% if request.user.is_authenticated %}
-        <label>You're logged as @{{user.username}}.</label>
-        <a href="{% url 'users:logout' %}">Logout</a>
-    {% else %}
-        <a href="{% url 'users:login' %}">Login</a>
-        <a href="{% url 'users:signup' %}">Register</a>
-    {% endif %}
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'home' %}">Recipe Calculator</a>
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsMenu" aria-controls="navbarsMenu" aria-expanded="true" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+    <div class="navbar-collapse collapse" id="navbarsMenu" >
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'home'%}">Home</a>
+            </li>
+            {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:profile'%}">My profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:logout' %}">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:signup' %}">Register</a>
+                </li>                
+            {% endif %}
+            
+        </ul>
+    </div>
 </nav>

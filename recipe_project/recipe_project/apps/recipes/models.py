@@ -16,10 +16,11 @@ class Category(models.Model):
 class Recipe(models.Model):
     name= models.TextField(verbose_name="Name",null=False)
     description= models.TextField(verbose_name="Description")
-    user=models.ForeignKey(Profile,on_delete=models.CASCADE,null=False)
+    profile=models.ForeignKey(Profile,on_delete=models.CASCADE,null=False)
     category=models.ForeignKey(Category,on_delete=models.CASCADE,null=False)
-    image = models.ImageField(upload_to='recipe/', blank=True, null=True)
+    image = models.ImageField(upload_to='recipe/pictures', blank=True, null=True)
     price= models.DecimalField(default=0.00,max_digits=9,decimal_places=2,verbose_name="Price",null=False)
+    
     class Meta:
         verbose_name = 'Recipe'
         verbose_name_plural = 'Recipes'
@@ -60,7 +61,7 @@ class Quantity(models.Model):
 
 class IngPrice(models.Model):
     recipes = models.ManyToManyField(Recipe)
-    price= models.DecimalField(default=0.00,max_digits=9,decimal_places=2,verbose_name="Price",null=False)
+    price= models.DecimalField(default=0.00, max_digits=9,decimal_places=2,verbose_name="Price",null=False)
     ingredient=models.ForeignKey(Ingredient,on_delete=models.CASCADE,null=False)
     measure=models.ForeignKey(Measure,on_delete=models.CASCADE,null=False)
     quantity=models.ForeignKey(Quantity,on_delete=models.CASCADE,null=False)
