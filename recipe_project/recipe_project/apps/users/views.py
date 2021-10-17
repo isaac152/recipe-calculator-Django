@@ -35,7 +35,7 @@ class Index(TemplateView):
 
 class Profile_ListView(ListView):
     model = Recipe
-    paginate_by = 2
+    paginate_by = 4
     template_name = "users/profile.html"
     context_object_name = "recipes"
 
