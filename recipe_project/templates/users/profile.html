@@ -1,0 +1,46 @@
+{% extends 'general_components/base.html' %}
+
+{% block head_content %}
+    <title>@{{ user.username }} | Profile</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'CSS/profile.css' %}" />
+{% endblock head_content %}
+
+
+{% block header_content %}
+    <h2>@{{ user.username}}'s profile</h2>
+{% endblock header_content %}
+    
+
+{% block main_content %}
+    <div class="card text-center">
+        <div class="card-header">
+            <h4>Recipe book</h4>
+        </div>
+        <div class="card-body">
+            <div class="card-deck">
+                {% for recipe in recipes %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{recipe.name}}</h5>
+                            <h6 class="card-subtitule mb-2 text-muted">{{recipe.category}}</h6>
+                            <p class="card-text">{{recipe.description}}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Cost: {{recipe.price}}</li>
+                        </ul>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-info">More details</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="card-footer">
+            {% include "general_components/pagination.html" %}
+        </div>
+    </div>
+    
+{% endblock main_content %}
+    
+    

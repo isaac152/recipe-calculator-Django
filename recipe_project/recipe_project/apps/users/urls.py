@@ -2,7 +2,7 @@ from django.contrib.auth.views import LogoutView
 from django.contrib.auth.decorators import login_required
 
 from django.urls import path
-from .views import SignUp,Login,Index
+from .views import SignUp,Login,Index,Profile_ListView
 
 urlpatterns = [
     path(
@@ -29,5 +29,10 @@ urlpatterns = [
         view= login_required(LogoutView.as_view(
             next_page=None
         )),
-    )
+    ),
+    path(
+        route= 'profile/',
+        name='profile',
+        view=login_required(Profile_ListView.as_view())
+    ),
 ]

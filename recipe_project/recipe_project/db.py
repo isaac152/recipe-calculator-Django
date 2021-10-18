@@ -16,7 +16,7 @@ POSTGRESQL={
         'ENGINE': 'django.db.backends.postgresql',
         'NAME':'recipe_calculator',
         'USER':'postgres',
-        'PASSWORD':'postgres',
+        'PASSWORD':'potato',
         'HOST':'localhost'
     }
 }
