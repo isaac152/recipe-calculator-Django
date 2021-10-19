@@ -14,9 +14,9 @@ POSTGRESQL={
     'default':{
         'client_encoding':'UTF8',
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME':'recipe_calculator',
+        'NAME':'recipe_test',
         'USER':'postgres',
-        'PASSWORD':'potato',
+        'PASSWORD':'postgres',
         'HOST':'localhost'
     }
 }

@@ -24,6 +24,7 @@ class RecipeForm(forms.Form):
         )
     )
     category = forms.ModelChoiceField(queryset=Category.objects.all(),required=True,to_field_name='name')
+    image = forms.ImageField()
     extra_category_count = forms.CharField(widget=forms.HiddenInput())
     ingredients = forms.ModelChoiceField(queryset=IngPrice.objects.all(),required=True)
 

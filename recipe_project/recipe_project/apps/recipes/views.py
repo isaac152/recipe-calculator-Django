@@ -28,7 +28,7 @@ class CreateRecipe(LoginRequiredMixin,TemplateView):
         return self.render_to_response({'form': form})
 
     def post(self, request, *args, **kwargs):
-        form = RecipeForm(request.POST,extra=request.POST.get('extra_category_count'))
+        form = RecipeForm(request.POST,request.FILES,extra=request.POST.get('extra_category_count'))
         if form.is_valid():
             form_cleaned = form.cleaned_data
             ingredients = self.list_ingredients(form_cleaned)
@@ -38,7 +38,8 @@ class CreateRecipe(LoginRequiredMixin,TemplateView):
                 description = form_cleaned['description'],
                 profile = self.request.user.profile,
                 category = form_cleaned['category'],
-                price= price
+                price= price,
+                image = form_cleaned['image']
             )
             recipe.save()
             [i.recipes.add(recipe) for i in ingredients]
@@ -49,18 +50,6 @@ class CreateRecipe(LoginRequiredMixin,TemplateView):
         for i in range(int(form['extra_category_count'])):
             ingredients.append(form[f'extra_category_{i}'])
         return ingredients
-
-
-"""
-
-    name= models.TextField(verbose_name="Name",null=False)
-    description= models.TextField(verbose_name="Description")
-    user=models.ForeignKey(Profile,on_delete=models.CASCADE,null=False)
-    category=models.ForeignKey(Category,on_delete=models.CASCADE,null=False)
-    image = models.ImageField(upload_to='recipe/', blank=True, null=True)
-    price= models.DecimalField(default=0.00,max_digits=9,decimal_places=2,verbose_name="Price",null=False)
-"""
-
 
 class CreateIngredient(LoginRequiredMixin,TemplateView):
     template_name='recipes/ingredient.html'

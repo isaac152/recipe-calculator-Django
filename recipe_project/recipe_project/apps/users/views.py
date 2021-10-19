@@ -43,5 +43,4 @@ class Profile_ListView(ListView):
         profile = Profile.objects.get(user=self.request.user)
         queryset = Recipe.objects.filter(profile_id = profile.id)
         return queryset
-    
 
