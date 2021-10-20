@@ -1,0 +1,18 @@
+body {
+  height: 100vh;
+  background: linear-gradient(to bottom, #5cbdcd, #1491a5);
+  background-repeat: no-repeat;
+}
+#foo {
+  background-color: #1491a5;
+  border: solid 2px #107180;
+  border-radius: 5px;
+}
+
+img {
+  width: 40%;
+}
+
+li {
+  list-style-type: none;
+}

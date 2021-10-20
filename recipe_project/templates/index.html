@@ -1,1 +1,61 @@
-{% extends 'general_components/base.html' %}
+{% extends 'general_components/base.html' %} {% block head_content %}
+<title>Index</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'CSS/index.css' %}" />
+{% endblock head_content %} {% block main_content %}
+<div
+  class="
+    d-flex
+    flex-md-row flex-column flex-wrap
+    justify-content-between
+    align-items-center
+  "
+>
+  <span class="p-4 my-5 h2 font-weight-bold text-center mr-5" id="typed"></span>
+  <img class="mx-5 my-3" src="{% static 'images/index/recipe.png' %}" />
+</div>
+
+{% endblock %} {% block footer_content %}
+<div id="foo" class="fixed-bottom text-white">
+  <ul class="d-flex flex-wrap justify-content-around">
+    <li class="py-2">
+      <a
+        class="text-white font-weight-bold d-flex align-items-center"
+        href="https://github.com/isaac152"
+        ><img
+          class="w-50"
+          src="{% static 'images/icon/github.png' %}"
+        />Isaac152
+      </a>
+    </li>
+    <li class="py-2">
+      <a
+        class="text-white font-weight-bold d-flex align-items-center"
+        href="https://github.com/Mark4nov"
+        ><img
+          class="w-50"
+          src="{% static 'images/icon/github.png' %}"
+        />Mark4nov
+      </a>
+    </li>
+  </ul>
+</div>
+{% endblock%} {% block scripts_block %}
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+<script>
+  var typed = new Typed("#typed", {
+    strings: [
+      "Keep a track of your recipes",
+      "Track the cost by its ingredients",
+    ],
+    typeSpeed: 75,
+    startDelay: 300,
+    backSpeed: 75,
+    showCursor: false,
+    smartBackspace: true,
+    backDelay: 1500,
+    loop: true,
+  });
+</script>
+{% endblock %}
